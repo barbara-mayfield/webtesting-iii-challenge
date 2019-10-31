@@ -48,3 +48,21 @@ test("displays 'Locked' if the `locked` prop is `true` and 'Unlocked' if otherwi
     const locked = wrapper.getByText(/locked/i)
     expect(locked).toBeVisible()
 })
+
+test("when `locked` or `closed` use the `red-led` class", async()=>{
+    const wrapper = rtl.render(<Display />)
+    const redLedClass = wrapper.container.firstChild.firstChild.childNodes[0].textContent;
+    const actual = wrapper.container.firstChild.firstChild.classList[0];
+
+    expect(actual).not.toEqual('red-led')
+    expect(redLedClass).not.toEqual('Locked')
+})
+
+test("when `unlocked` or `open` use the `green-led` class", async() => {
+    const wrapper = rtl.render(<Display />)
+    const greenLedClass = wrapper.container.firstChild.firstChild.childNodes[0].textContent;
+    const actual = wrapper.container.firstChild.firstChild.classList[1];
+
+    expect(actual).toEqual('green-led')
+    expect(greenLedClass).toEqual('Unlocked')
+})
