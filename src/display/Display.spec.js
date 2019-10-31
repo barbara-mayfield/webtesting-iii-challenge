@@ -36,3 +36,15 @@ test("Display component gate open/closed, locked/unlocked", async() => {
     expect(locked).toBeVisible()
     expect(closed).toBeVisible()
 })
+
+test("displays 'Closed' if the `closed` prop is `true` and 'Open' if otherwise", async() => {
+    const wrapper = rtl.render(<Display closed={true} />)
+    const closed = wrapper.getByText(/close/i)
+    expect(closed).toBeVisible()
+})
+
+test("displays 'Locked' if the `locked` prop is `true` and 'Unlocked' if otherwise", () => {
+    const wrapper = rtl.render(<Display locked={true} />)
+    const locked = wrapper.getByText(/locked/i)
+    expect(locked).toBeVisible()
+})
